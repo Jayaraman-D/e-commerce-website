@@ -1,11 +1,14 @@
 // Products.jsx File
 
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from "react-router-dom"
 
 function Products() {
 
   const [Products, setProducts] = useState([]);
   const [error, setError] = useState('');
+
+  const navigate = useNavigate();
 
   useEffect(() => {
 
