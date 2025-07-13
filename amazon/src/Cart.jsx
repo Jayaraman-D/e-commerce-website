@@ -2,11 +2,15 @@
 
 
 import React from 'react'
+import CartProducts from './CartProducts.jsx'
 
 function Cart() {
-  return (
-    <div>Cart Component</div>
-  )
+    return (
+        <>
+            <CartProducts/>
+        </>
+
+    )
 }
 
 export default Cart
