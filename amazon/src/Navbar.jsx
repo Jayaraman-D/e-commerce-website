@@ -1,8 +1,11 @@
 // Navbar.jsx File
 
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function Navbar() {
+const navigate = useNavigate();
+
   return (
     <div className='navs'>
       <div className="amazon-logo">
@@ -18,7 +21,7 @@ function Navbar() {
         Returs & Orders
       </div>
 
-      <div className="cart">
+      <div className="cart" onClick={()=>{navigate('/cart')}}>
         cart
         <i className="bi bi-cart3"></i>
         <span>0</span>
