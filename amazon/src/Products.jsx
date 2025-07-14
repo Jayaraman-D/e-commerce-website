@@ -55,19 +55,19 @@ function Products() {
   //   }
   // }
 
-  const handleAddtoCart = async (name, id, image, price) => {
+  const handleAddtoCart = async (name, id, image, price, quantity=1) => {
     console.log('add to cart button clicked')
     try {
 
       const res = await axios.get(`http://localhost:3000/cart/?id=${id}`);
       if (res.data.length > 0) {
 
-        console.log("data already exist"); 
+        console.log("data already exist");
         return
 
       }
 
-      await axios.post('http://localhost:3000/cart', { "name": name, "id": id, "image": image, "priceCents": price })
+      await axios.post('http://localhost:3000/cart', { "name": name, "id": id, "image": image, "priceCents": price, "quantity": quantity})
         .then((data) => console.log("data added"))
     }
 
@@ -116,7 +116,7 @@ function Products() {
               </select>
             </div>
 
-            <button type='button' onClick={(() => { handleAddtoCart(product.name, product.id, product.image, product.priceCents) })}>Add to Cart</button>
+            <button type='button' onClick={(() => { handleAddtoCart(product.name, product.id, product.image, product.priceCents, product.quantity) })}>Add to Cart</button>
           </div>))
       ) : (<div>No Products </div>)}
     </div>
