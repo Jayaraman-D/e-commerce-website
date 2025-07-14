@@ -44,7 +44,7 @@ function CartProducts() {
                             <div>
                                 <b>{product.name}</b>
                                 <h5>$ {product.priceCents}</h5>
-                                <p>Quantity: 2</p>
+                                <p>Quantity: {product.quantity}</p>
                                 <span className='m-2'>Update</span>
                                 <span>Delete</span>
 
