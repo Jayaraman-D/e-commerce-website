@@ -2,10 +2,11 @@
 
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom"
+import axios from 'axios';
 
 function Products() {
 
-  const [Products, setProducts] = useState([]);
+  const [products, setProducts] = useState([]);
   const [error, setError] = useState('');
 
   const navigate = useNavigate();
@@ -36,11 +37,29 @@ function Products() {
       </div>
     )
   }
+
+
+
+ const handleAddtoCart = async (name, id, image, price) => {
+  try {
+    const res = await axios.post('http://localhost:3000/cart', {
+      name,
+      id,
+      image,
+      priceCents: price
+    });
+    console.log('Data added to cart', res.data);
+  } catch (error) {
+    console.log(error);
+    setError(error.message);
+  }
+}
+
   return (
     <div className='main-container'>
 
-      {Products.length > 0 ? (
-        Products.map((product) => (
+      {products.length > 0 ? (
+        products.map((product) => (
           <div key={product.id} className='product-container'>
 
             <img src={product.image} alt={product.name}
@@ -74,7 +93,7 @@ function Products() {
               </select>
             </div>
 
-            <button type='button'>Add to Cart</button>
+            <button type='button' onClick={(()=>{handleAddtoCart(product.name, product.id, product.image, product.priceCents)})}>Add to Cart</button>
           </div>))
       ) : (<div>No Products </div>)}
     </div>
