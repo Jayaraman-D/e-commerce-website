@@ -40,20 +40,43 @@ function Products() {
 
 
 
- const handleAddtoCart = async (name, id, image, price) => {
-  try {
-    const res = await axios.post('http://localhost:3000/cart', {
-      name,
-      id,
-      image,
-      priceCents: price
-    });
-    console.log('Data added to cart', res.data);
-  } catch (error) {
-    console.log(error);
-    setError(error.message);
+  //  const handleAddtoCart = async (name, id, image, price) => {
+  //   try {
+  //     const res = await axios.post('http://localhost:3000/cart', {
+  //       name,
+  //       id,
+  //       image,
+  //       priceCents: price
+  //     });
+  //     console.log('Data added to cart', res.data);
+  //   } catch (error) {
+  //     console.log(error);
+  //     setError(error.message);
+  //   }
+  // }
+
+  const handleAddtoCart = async (name, id, image, price) => {
+    console.log('add to cart button clicked')
+    try {
+
+      const res = await axios.get(`http://localhost:3000/cart/?id=${id}`);
+      if (res.data.length > 0) {
+
+        console.log("data already exist"); 
+        return
+
+      }
+
+      await axios.post('http://localhost:3000/cart', { "name": name, "id": id, "image": image, "priceCents": price })
+        .then((data) => console.log("data added"))
+    }
+
+    catch (error) {
+      console.log(error);
+      setError(error.message)
+    }
+
   }
-}
 
   return (
     <div className='main-container'>
@@ -68,7 +91,7 @@ function Products() {
             <div> <b>{product.name}</b> </div>
 
             <div className='d-flex justify-content-center' >
-              <img src={`public/ratings/rating-${(product.rating.stars)*10}.png`} alt='ratings'
+              <img src={`public/ratings/rating-${(product.rating.stars) * 10}.png`} alt='ratings'
                 style={{ width: '100px', height: '20px' }}
               />
 
@@ -93,7 +116,7 @@ function Products() {
               </select>
             </div>
 
-            <button type='button' onClick={(()=>{handleAddtoCart(product.name, product.id, product.image, product.priceCents)})}>Add to Cart</button>
+            <button type='button' onClick={(() => { handleAddtoCart(product.name, product.id, product.image, product.priceCents) })}>Add to Cart</button>
           </div>))
       ) : (<div>No Products </div>)}
     </div>
