@@ -2,11 +2,15 @@
 
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function CartProducts() {
 
     const [cartproducts, setCartproducts] = useState([]);
     const [error, setError] = useState('');
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         axios.get('http://localhost:3000/cart')
@@ -20,56 +24,62 @@ function CartProducts() {
 
     return (
         <div>
+            <div className='navs'>
+                <div className="amazon-logo" onClick={() => navigate('/')}>
+                    <img src='/logos/amazon-logo-white.png' alt='logo' />
+                </div>
+                </div>
 
-            {cartproducts.length > 0 ? (
 
-                cartproducts.map((product) => (
-                    <div key={product.id} className='cart-container'>
-                        <div>
-                            <img src={product.image} alt={product.name}
-                                style={{ width: '150px', height: "100px" }}
-                            />
+                {cartproducts.length > 0 ? (
+
+                    cartproducts.map((product) => (
+                        <div key={product.id} className='cart-container'>
+                            <div>
+                                <img src={product.image} alt={product.name}
+                                    style={{ width: '150px', height: "100px" }}
+                                />
+                            </div>
+
+                            <div>
+                                <b>{product.name}</b>
+                                <h5>$ {product.priceCents}</h5>
+                                <p>Quantity: 2</p>
+                                <span className='m-2'>Update</span>
+                                <span>Delete</span>
+
+
+                            </div>
+
+                            <div>
+
+                                <b className='my-2'>Choose a delivery option</b> <br />
+                                <label>
+                                    <input type='radio' name={product.id} value='free' />
+                                    Free Shipping
+                                </label> <br />
+                                <label>
+                                    <input type='radio' name={product.id} value='minimun' />
+                                    $4.99 - Shipping cost
+                                </label> <br />
+                                <label>
+                                    <input type='radio' name={product.id} value='maximum' />
+                                    $9.99 - shipping cost
+                                </label>
+                            </div>
+
                         </div>
-
-                        <div>
-                            <b>{product.name}</b>
-                            <h5>$ {product.priceCents}</h5>
-                            <p>Quantity: 2</p>
-                            <span className='m-2'>Update</span>
-                            <span>Delete</span>
+                    ))
+                )
 
 
-                        </div>
 
-                        <div>
 
-                            <b className='my-2'>Choose a delivery option</b> <br />
-                            <label>
-                                <input type='radio' name={product.id} value='free' />
-                                Free Shipping
-                            </label> <br />
-                            <label>
-                                <input type='radio' name={product.id} value='minimun' />
-                                $4.99 - Shipping cost
-                            </label> <br />
-                            <label>
-                                <input type='radio' name={product.id} value='maximum' />
-                                $9.99 - shipping cost
-                            </label>
-                        </div>
+                    : (<div> No product </div>)}
 
-                    </div>
-                ))
+
+            </div>
             )
-
-
-
-
-                : (<div> No product </div>)}
-
-
-        </div>
-    )
 }
 
-export default CartProducts
+            export default CartProducts

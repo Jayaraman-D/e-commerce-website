@@ -6,26 +6,22 @@ import './index.css'
 import App from './App.jsx'
 import Products from './Products.jsx'
 import Cart from './Cart.jsx'
-import CartProducts from './CartProducts.jsx'
+
 
 
 const router = createBrowserRouter([
-{
-  path: '/',
-  element: <App />
-},
-{
-  path: '/products',
-  element: <Products />
-},
-{
-  path: '/cart',
-  element: <Cart />
-},
-{
-  path:'/carts',
-  element:<CartProducts/>
-}
+  {
+    path: '/',
+    element: <App />
+  },
+  {
+    path: '/products',
+    element: <Products />
+  },
+  {
+    path: '/cart',
+    element: <Cart />
+  }
 
 ])
 
