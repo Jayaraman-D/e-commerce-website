@@ -12,7 +12,7 @@ function Navbar() {
   return (
     <div className='navs'>
       <div className="amazon-logo">
-        <img src='public/logos/amazon-logo-white.png' alt='logo' />
+        <img src='/logos/amazon-logo-white.png' alt='logo' />
       </div>
 
       <div className="search">
