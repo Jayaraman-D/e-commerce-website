@@ -661,32 +661,18 @@
   ],
   "cart": [
     {
-      "id": "5968897c-4d27-4872-89f6-5bcb052746d7",
-      "name": "Women's Chiffon Beachwear Cover Up - Black",
-      "image": "images/women-chiffon-beachwear-coverup-black.jpg",
-      "priceCents": 2070,
-      "quantity": 1
+      "id": "dd82ca78-a18b-4e2a-9250-31e67412f98d",
+      "name": "Plain Hooded Fleece Sweatshirt",
+      "image": "images/plain-hooded-fleece-sweatshirt-yellow.jpg",
+      "priceCents": 2400,
+      "quantity": 5
     },
     {
-      "id": "04701903-bc79-49c6-bc11-1af7e3651358",
-      "name": "Women's Two Strap Buckle Sandals - Tan",
-      "image": "images/women-beach-sandals.jpg",
-      "priceCents": 2499,
-      "quantity": 1
-    },
-    {
-      "id": "4df68c27-fd59-4a6a-bbd1-e754ddb6d53c",
-      "name": "Men's Nav  igator Sunglasses Pilot",
-      "image": "images/men-navigator-sunglasses-brown.jpg",
-      "priceCents": 1690,
-      "quantity": 1
-    },
-    {
-      "id": "15b6fc6f-327a-4ec4-896f-486349e85a3d",
-      "name": "Intermediate Size Basketball",
-      "image": "images/intermediate-composite-basketball.jpg",
-      "priceCents": 2095,
-      "quantity": 1
+      "id": "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
+      "name": "Black and Gray Athletic Cotton Socks - 6 Pairs",
+      "image": "images/athletic-cotton-socks-6-pairs.jpg",
+      "priceCents": 1090,
+      "quantity": 9
     }
   ]
 }

@@ -8,6 +8,7 @@ function Products() {
 
   const [products, setProducts] = useState([]);
   const [error, setError] = useState('');
+  const [qty, setQty] = useState({});
 
   const navigate = useNavigate();
 
@@ -40,23 +41,20 @@ function Products() {
 
 
 
-  //  const handleAddtoCart = async (name, id, image, price) => {
-  //   try {
-  //     const res = await axios.post('http://localhost:3000/cart', {
-  //       name,
-  //       id,
-  //       image,
-  //       priceCents: price
-  //     });
-  //     console.log('Data added to cart', res.data);
-  //   } catch (error) {
-  //     console.log(error);
-  //     setError(error.message);
-  //   }
-  // }
+  const handleChange = (e, productid, productName) => {
+    console.log(productid);
+    console.log(productName);
+    const quantity = parseInt(e.target.value);
+    console.log(quantity);
+    setQty((prevqty) => ({
+      ...prevqty,
+      [productid]: quantity
+    }))
+    console.log(quantity)
+  };
 
-  const handleAddtoCart = async (name, id, image, price, quantity=1) => {
-    console.log('add to cart button clicked')
+  const handleAddtoCart = async (name, id, image, price, quantity) => {
+    console.log('add to cart button clicked');
     try {
 
       const res = await axios.get(`http://localhost:3000/cart/?id=${id}`);
@@ -67,7 +65,7 @@ function Products() {
 
       }
 
-      await axios.post('http://localhost:3000/cart', { "name": name, "id": id, "image": image, "priceCents": price, "quantity": quantity})
+      await axios.post('http://localhost:3000/cart', { "name": name, "id": id, "image": image, "priceCents": price, "quantity": quantity })
         .then((data) => console.log("data added"))
     }
 
@@ -91,7 +89,7 @@ function Products() {
             <div> <b>{product.name}</b> </div>
 
             <div className='d-flex justify-content-center' >
-              <img src={`public/ratings/rating-${(product.rating.stars) * 10}.png`} alt='ratings'
+              <img src={`/ratings/rating-${(product.rating.stars) * 10}.png`} alt='ratings'
                 style={{ width: '100px', height: '20px' }}
               />
 
@@ -102,21 +100,18 @@ function Products() {
             <h3>${product.priceCents}</h3>
 
             <div className="product-quantity-container">
-              <select>
-                <option selected value={product.id}>1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
+              <select
+                value={qty[product.id] || 1}
+                onChange={(e) => handleChange(e, product.id)}
+              >
+                {[...Array(10)].map((_, i) => (
+                  <option key={i + 1} value={i + 1}>{i + 1}</option>
+                ))}
               </select>
+
             </div>
 
-            <button type='button' onClick={(() => { handleAddtoCart(product.name, product.id, product.image, product.priceCents, product.quantity) })}>Add to Cart</button>
+            <button type='button' onClick={(() => { handleAddtoCart(product.name, product.id, product.image, product.priceCents, qty[product.id] || 1) })}>Add to Cart</button>
           </div>))
       ) : (<div>No Products </div>)}
     </div>
